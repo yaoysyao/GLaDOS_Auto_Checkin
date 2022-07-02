@@ -68,4 +68,4 @@ https://github.com/tyIceStream/GLaDOS_Checkin.git
 </p>
 
 - 本项目由Workflow控制，每日0时30分自动执行。
-- 本项目目前可以正常运行，如果有其他使用问题请在Issues留言。
+- 本项目目前可以正常运行，如果有其他使用问题或者需求说明请在Issues留言。
