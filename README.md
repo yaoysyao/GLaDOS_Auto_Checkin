@@ -1,6 +1,7 @@
 # GLaDOS_Checkin
 
 GLaDOS automatic check-in bypassing CloudFlare using github action
+此项目代码在原项目代码(https://github.com/tyIceStream/GLaDOS_Checkin.git)的基础上进行修改，增加了推送消息到pushplus平台
 
 ## 功能描述
 
@@ -36,6 +37,7 @@ GLaDOS automatic check-in bypassing CloudFlare using github action
 </p>
 
 ### 2. 添加 PUSHPLUS_TOKEN 至 Secrets,如果不想推送通知可以不填写此项
+
 - 建立名为`PUSHPLUS_TOKEN`的 secret，值为复制的`pushplus（推送加平台的token）`，最后点击`Add secret`
 - 登陆[pushplus](http://www.pushplus.plus/)
 
@@ -44,17 +46,21 @@ GLaDOS automatic check-in bypassing CloudFlare using github action
 </p>
 
 - 推送消息略有延迟，但是影响不大，每个账号发送一条通知消息
+
 <p align="center">
   <img src="imgs/pushplus_message.png" />
 </p>
 
 - 推送消息详情
+
 <p align="center">
   <img src="imgs/pushplus_message_info.png" />
 </p>
 
 ### 3. 启用 Actions
+
 - 在项目页面，依次点击`Actions`-->`glados`-->`Run workflow`-->`Run workflow`以激活Actions
+
 <p align="center">
   <img src="imgs/Step4.png" />
 </p>
