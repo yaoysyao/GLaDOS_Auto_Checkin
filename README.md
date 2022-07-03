@@ -1,14 +1,34 @@
 # GLaDOS_Checkin
 
 GLaDOS automatic check-in bypassing CloudFlare using github action
-此项目代码在原项目代码(https://github.com/tyIceStream/GLaDOS_Checkin.git)的基础上进行修改，增加了推送消息到pushplus平台
+此项目代码在原项目代码(https://github.com/tyIceStream/GLaDOS_Checkin.git)的基础上进行修改，感谢大佬对于项目的贡献，本项目增加了推送消息到pushplus平台
 
 ## 功能描述
 
 1. 每日自动进行签到（本项目可通过CloudFlare反爬机制）
 2. 支持多用户签到，多个Cookie之间采用`&&`手动分割
 3. 本项目可触发Github Notifications，出现Cookie过期/签到失败等可自动发送Email
-3. 本项目包含Github Actions keep alive模块，可自动激活Github Actions
+4. 本项目包含Github Actions keep alive模块，可自动激活Github Actions
+5. 支持推送签到消息至pushplus平台，可在微信查看签到状态，暂时只支持pushplus，如果需要server酱可在issues提出
+
+## 重要！重要！
+
+首次部署完毕，启动工作流后一定要查看工作流日志，查看是否执行成功，如果执行失败，请在issues中提出
+<p align="center">
+  <img src="imgs/check_workflow_log_1.png" />
+</p>
+<p align="center">
+  <img src="imgs/check_workflow_log_2.png" />
+</p>
+
+#### 查看checkin日志时，如果出现error提示，请多尝试几次，这是正常的，如果打开后发现有执行异常，请在Issues提出
+
+<p align="center">
+  <img src="imgs/check_workflow_log_error.png" />
+</p>
+<p align="center">
+  <img src="imgs/check_workflow_log_3.png" />
+</p>
 
 ## 使用方法
 
