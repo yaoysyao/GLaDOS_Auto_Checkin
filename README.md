@@ -11,6 +11,23 @@ GLaDOS automatic check-in bypassing CloudFlare using github action
 4. 本项目包含Github Actions keep alive模块，可自动激活Github Actions
 5. 支持推送消息到pushplus平台，server酱也可以支持，如果需要请提出
 
+#### 重要！重要！
+
+在fork本项目并配置完成后，请启动工作流并检查是否已经执行签到
+<p align="center">
+  <img src="imgs/check_workflow_log_1.png" />
+</p>
+
+<p align="center">
+  <img src="imgs/check_workflow_log_2.png" />
+</p>
+如果查看checkin的时候出现error，请多尝试几次,如果日志中出现错误，请提出
+<p align="center">
+  <img src="imgs/check_workflow_log_error.png" />
+</p>
+<p align="center">
+  <img src="imgs/check_workflow_log_3.png" />
+</p>
 ## 使用方法
 
 ### 1. 添加 Cookie 至 Secrets
