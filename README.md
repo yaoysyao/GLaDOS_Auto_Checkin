@@ -63,13 +63,9 @@ GLaDOS automatic check-in bypassing CloudFlare using github action
   <img src="imgs/pushplus_token.png" />
 </p>
 
-- 推送消息略有延迟，但是影响不大，每个账号发送一条通知消息
+- 推送消息详情,所有的账号签到状态均在一个推送通知中显示
 
-<p align="center">
-  <img src="imgs/pushplus_message.png" />
-</p>
-
-- 推送消息详情
+#### 为保证隐私安全，在工作流日志不输出账号的信息，在推送消息中将推送账号邮箱，便于查看每个账号是否签到成功
 
 <p align="center">
   <img src="imgs/pushplus_message_info.png" />
