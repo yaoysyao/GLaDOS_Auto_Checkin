@@ -1,7 +1,6 @@
 # GLaDOS_Checkin
 
-GLaDOS automatic check-in bypassing CloudFlare using github action
-此项目代码在[原项目代码](https://github.com/tyIceStream/GLaDOS_Checkin.git)的基础上进行修改，增加了推送消息到pushplus平台
+## GLaDOS automatic check-in bypassing CloudFlare using github action 此项目代码在[大佬原项目代码，点击进入](https://github.com/tyIceStream/GLaDOS_Checkin.git)的基础上进行修改，增加了推送消息到pushplus平台
 
 ## 功能描述
 
