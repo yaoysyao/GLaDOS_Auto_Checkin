@@ -59,14 +59,16 @@ def glados_status(driver):
 
 
 def pushplus_message(token, message):
-    print('start push message to pushplus:', str(message))
-    payload = {'token': token, "channel": "wechat", "template": "html", "content": message, "title": "签到状态"}
+    payload = {'token': token, "channel": "wechat", "template": "html", "content": message, "title": "glados签到状态"}
     resp = requests.post("http://www.pushplus.plus/send", params=payload)
-    print('pushplus code:', resp.status_code)
+    if resp.status_code == 200:
+        print('pushplus success code:', resp.status_code)
+    else:
+        print('push message to pushplus error,the code is:', resp.status_code)
     resp.close()
 
 
-def glados(cookie_string, pushplus_token=None):
+def glados(cookie_string):
     options = uc.ChromeOptions()
     options.add_argument("--disable-popup-blocking")
 
@@ -102,22 +104,18 @@ def glados(cookie_string, pushplus_token=None):
     if checkin_code == -2: checkin_message = "Login fails, please check your cookie."
     print(f"【Checkin】{checkin_message}")
 
+    message = ''
     if checkin_code != -2:
         status_code, status_data = glados_status(driver)
         left_days = int(float(status_data["leftDays"]))
         print(f"【Status】Left days:{left_days}")
-        try:
-            if pushplus_token is not None and len(pushplus_token) > 0:
-                pushplus_message(pushplus_token, '签到时间:' + str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) + ',message:【Checkin】' + checkin_message + ',【Status】Left days:' + str(left_days) + ',【email】' + status_data["email"])
-            else:
-                print('The pushplus_token is none')
-        except Exception:
-            print('push message error')
-
+        message = '签到时间:' + str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) + ',message:【Checkin】' + checkin_message + ',【Status】Left days:' + str(left_days) + ',【email】' + status_data["email"]
+    else:
+        message = 'The account login fails, please check your cookie. '
     driver.close()
     driver.quit()
 
-    return checkin_code
+    return checkin_code, message
 
 
 pushplus_token = None
@@ -131,10 +129,27 @@ if __name__ == "__main__":
     cookie_string = cookie_string.split("&&")
     checkin_codes = list()
 
+    account_checkin_message = []
+    checkin_message = []
+    # 遍历cookie执行签到，并返回签到状态码和签到信息
     for idx, cookie in enumerate(cookie_string):
         print(f"【Account_{idx + 1}】:")
-        checkin_code = glados(cookie, pushplus_token=pushplus_token)
+        checkin_code, account_checkin_message = glados(cookie)
         checkin_codes.append(checkin_code)
+
+        # 存在账户签到信息，说明成功执行了签到
+        if account_checkin_message is not None and len(account_checkin_message) > 0:
+            checkin_message.append(f"【Account_{idx + 1}】:" + account_checkin_message + "\n")
+
+    # 所有账号签到完毕，判断是否有签到信息，如果有签到信息说明账号执行了签到
+    if checkin_message is not None and len(checkin_message) > 0:
+        try:
+            if pushplus_token is not None and len(pushplus_token) > 0:
+                pushplus_message(pushplus_token, ''.join(checkin_message))
+            else:
+                print('The pushplus_token is none')
+        except Exception:
+            print('push message error')
 
     assert -2 not in checkin_codes, "At least one account login fails."
     assert checkin_codes.count(0) + checkin_codes.count(1) == len(checkin_codes), "Not all the accounts check in successfully."
