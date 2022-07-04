@@ -37,7 +37,7 @@ if __name__ == "__main__":
                 print('The pushplus_token is none')
             #     推送至server酱
             if server_token is not None and len(server_token) > 0:
-                server_messgae(token=server_token, title='Glados签到状态', message=''.join(checkin_message))
+                server_messgae(token=server_token, title='Glados checkIn status', message=''.join(checkin_message))
             else:
                 print('The server_token is none')
         except Exception:

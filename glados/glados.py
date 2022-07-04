@@ -89,14 +89,14 @@ def glados(cookie_string):
 
     checkin_code, checkin_message = glados_checkin(driver)
     if checkin_code == -2: checkin_message = "Login fails, please check your cookie."
-    print(f"【Checkin】{checkin_message}")
+    print(f"[Checkin] {checkin_message}")
 
     message = ''
     if checkin_code != -2:
         status_code, status_data = glados_status(driver)
         left_days = int(float(status_data["leftDays"]))
-        print(f"【Status】Left days:{left_days}")
-        message = '签到时间:' + str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) + ',message:【Checkin】' + checkin_message + ',【Status】Left days:' + str(left_days) + ',【email】' + status_data["email"]
+        print(f"[Status] Left days:{left_days}")
+        message = 'CheckIn time:' + str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) + ',message:[Checkin]' + checkin_message + ',[Status] Left days:' + str(left_days) + ',[email]' + status_data["email"]
     else:
         message = 'The account login fails, please check your cookie. '
     driver.close()
