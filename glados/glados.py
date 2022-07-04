@@ -96,7 +96,7 @@ def glados(cookie_string):
         status_code, status_data = glados_status(driver)
         left_days = int(float(status_data["leftDays"]))
         print(f"[Status] Left days:{left_days}")
-        message = 'CheckIn time:' + str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) + ',message:[Checkin]' + checkin_message + ',[Status] Left days:' + str(left_days) + ',[email]' + status_data["email"]
+        message = 'CheckIn time:' + str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) + ', Checkin message:' + checkin_message + ', Status: Left days ' + str(left_days) + ', email:' + status_data["email"]
     else:
         message = 'The account login fails, please check your cookie. '
     driver.close()
