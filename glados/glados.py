@@ -1,17 +1,14 @@
 # encoding=utf8
 import io
-import re
-import sys
-import time
 import json
 import subprocess
-import requests
+import sys
+import time
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 import undetected_chromedriver as uc
 from selenium.webdriver.support.ui import WebDriverWait
-import os
 
 
 def get_driver_version():
@@ -56,16 +53,6 @@ def glados_status(driver):
     resp = driver.execute_script("return " + status_query)
     resp = json.loads(resp["response"])
     return resp["code"], resp["data"]
-
-
-def pushplus_message(token, message):
-    payload = {'token': token, "channel": "wechat", "template": "html", "content": message, "title": "glados签到状态"}
-    resp = requests.post("http://www.pushplus.plus/send", params=payload)
-    if resp.status_code == 200:
-        print('pushplus success code:', resp.status_code)
-    else:
-        print('push message to pushplus error,the code is:', resp.status_code)
-    resp.close()
 
 
 def glados(cookie_string):
@@ -116,40 +103,3 @@ def glados(cookie_string):
     driver.quit()
 
     return checkin_code, message
-
-
-pushplus_token = None
-
-if __name__ == "__main__":
-    cookie_string = sys.argv[1]
-    pushplus_token = os.environ['PUSHPLUS_TOKEN']
-
-    assert cookie_string
-
-    cookie_string = cookie_string.split("&&")
-    checkin_codes = list()
-
-    account_checkin_message = []
-    checkin_message = []
-    # 遍历cookie执行签到，并返回签到状态码和签到信息
-    for idx, cookie in enumerate(cookie_string):
-        print(f"【Account_{idx + 1}】:")
-        checkin_code, account_checkin_message = glados(cookie)
-        checkin_codes.append(checkin_code)
-
-        # 存在账户签到信息，说明成功执行了签到
-        if account_checkin_message is not None and len(account_checkin_message) > 0:
-            checkin_message.append(f"【Account_{idx + 1}】:" + account_checkin_message + "\n")
-
-    # 所有账号签到完毕，判断是否有签到信息，如果有签到信息说明账号执行了签到
-    if checkin_message is not None and len(checkin_message) > 0:
-        try:
-            if pushplus_token is not None and len(pushplus_token) > 0:
-                pushplus_message(pushplus_token, ''.join(checkin_message))
-            else:
-                print('The pushplus_token is none')
-        except Exception:
-            print('push message error')
-
-    assert -2 not in checkin_codes, "At least one account login fails."
-    assert checkin_codes.count(0) + checkin_codes.count(1) == len(checkin_codes), "Not all the accounts check in successfully."
