@@ -10,3 +10,15 @@ def pushplus_message(token, message):
         print('push message to pushplus error,the code is:', resp.status_code)
     resp.close()
 
+
+def server_messgae(token, title, message):
+    payload = {"title": title, "desp": message, }
+    resp = requests.post(f"https://sctapi.ftqq.com/{token}.send", params=payload)
+    result = resp.json()
+    if result["code"] == 0:
+        print("Push the message to server success,the code is:" + str(resp.text))
+    if result["code"] != 0:
+        print("Push the message to server error,The error message is " + str(resp.text))
+    code = resp.status_code
+    resp.close()
+    return code
