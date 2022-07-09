@@ -2,6 +2,8 @@
 
 ## GLaDOS automatic check-in bypassing CloudFlare using github action
 
+### 由于GLaDOS修改了相关规则，免费用户已经无法通过签到获取天数，好像免费用户可以免费签到七天，然后就不能签到了，会提示 Can not checkin without a valid Membership, Please upgrade to Basic/Pro plan，这不是脚本错误，请开通会员在进行签到
+
 ## 功能描述
 
 #### 1. 每日自动进行签到（本项目可通过CloudFlare反爬机制）
