@@ -2,6 +2,8 @@
 
 ## GLaDOS automatic check-in bypassing CloudFlare using github action
 
+## 介绍一下我个人新的签到项目，各大网站全自动签到，目前支持GLADOS,bilibili直播,天翼云盘，后续会支持更多新网站，也可以在issues中提出你的需求，欢迎fork项目使用，如果觉得有用，请点击star
+
 ### 由于GLaDOS修改了相关规则，免费用户已经无法通过签到获取天数，好像免费用户可以免费签到七天，然后就不能签到了，会提示 Can not checkin without a valid Membership, Please upgrade to Basic/Pro plan，这不是脚本错误，请开通会员在进行签到
 
 ## 功能描述
